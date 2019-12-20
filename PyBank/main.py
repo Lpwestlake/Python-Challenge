@@ -31,17 +31,31 @@ with open(csvpath, newline="") as csvfile:
         total_revenue = total_revenue + int(row[1])
         #print(total_revenue)
 
+       
         current_revenue = int(row[1])
-        monthly_revenue_change = current_revenue - previous_revenue
+        revenue_change_list = current_revenue - previous_revenue
         previous_revenue = current_revenue
+        #revenue_change.append(monthly_revenue_change)
+        
+        # def average_change(monthly_revenue_change):
+        #     length = len(monthly_revenue_change)
+        #     change = monthly_revenue_change
+        #     for row in monthly_revenue_change:
+        #         return change/length
+        #     print(monthly_revenue_change)
+        
+        #print(monthly_revenue_change)
+        sum = sum(revenue_change_list)
+        print(sum)
+        
+        #print(revenue_change_list)
 
-        monthly_change.append(monthly_revenue_change)
-        print(monthly_revenue_change)
+#average = sum/len(monthly_revenue_change)
 
+        
 
-
-# avg_monthly_change = sum(monthly_revenue_change) / len(month)
-# print(avg_monthly_change)
+#vavg_monthly_change = sum(monthly_revenue_change) / len(row)
+#print(avg_monthly_change)
 
 
 
