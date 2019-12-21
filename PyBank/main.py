@@ -4,6 +4,7 @@ import csv
 # define read path (run from Python-Challenge folder)
 csvpath = os.path.join("PyBank", "Resources/budget_data.csv")
 
+# define write path for output (run from Python-Challenge folder)
 output_path = os.path.join("Pybank", "Output/PyBank.txt")
 
 # C:\Users\westl\Desktop\Python-Challenge\Python-Challenge\PyBank\Resources\budget_data.csv
