@@ -1,128 +1,75 @@
 import os
 import csv 
 
-csvpath = os.path.join("Resources/budget_data.csv")
+# define read path (run from Python-Challenge folder)
+csvpath = os.path.join("PyBank", "Resources/budget_data.csv")
 
+output_path = os.path.join("Pybank", "Output/PyBank.txt")
 
 # C:\Users\westl\Desktop\Python-Challenge\Python-Challenge\PyBank\Resources\budget_data.csv
 
 with open(csvpath, newline="") as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
+# designate header row
     csv_header = next(csv_reader)
 
 # define lists
     month = []
     revenue = []
-    revenue_change = []
-    monthly_change = []
+    revenue_change_list = []
 
 # define variables
     month_count = 0
     total_revenue = 0
-    previous_revenue = 0
-    #print(f'header: {csv_header}')
+
+# define first row so changes calculation can skip first row change from 0 (similar to a 'look ahead')
+    first_row = next(csv_reader)
+    previous_revenue = int(first_row[1])
+    month_count = month_count + 1
+    total_revenue = total_revenue + int(first_row[1])
 
 # create for loop
     for row in csv_reader:
-        month.append(row[0])
-        revenue.append(row[1])
-        month_count += 1
-        #print(month_count)
+    # calculate total months and total revenue    
+        month_count = month_count + 1
         total_revenue = total_revenue + int(row[1])
-        #print(total_revenue)
 
-       
-        current_revenue = int(row[1])
-        revenue_change_list = current_revenue - previous_revenue
-        previous_revenue = current_revenue
-        #revenue_change.append(monthly_revenue_change)
-        
-        # def average_change(monthly_revenue_change):
-        #     length = len(monthly_revenue_change)
-        #     change = monthly_revenue_change
-        #     for row in monthly_revenue_change:
-        #         return change/length
-        #     print(monthly_revenue_change)
-        
-        #print(monthly_revenue_change)
-        sum = sum(revenue_change_list)
-        print(sum)
-        
-        #print(revenue_change_list)
+    # create list of profit/loss changes for each row
+        revenue_change = int(row[1])-previous_revenue
+        revenue_change_list.append(revenue_change)
+        previous_revenue = int(row[1])
 
-#average = sum/len(monthly_revenue_change)
+    # greatest increase in profits
+        if revenue_change == max(revenue_change_list):
+           max_month = row[0]
+           
+    # greatest decrease (lowest increase) in profits 
+        if revenue_change == min(revenue_change_list):
+           min_month = row[0]
+          
+# calculate averae of changes in revenue
+avg_change = sum(revenue_change_list)/len(revenue_change_list)
+greatest_increase = max(revenue_change_list)
+greatest_decrease = min(revenue_change_list)
+  
+# generate print statmeents
+print("Financial Analysis")
+print("---------------------")
+print(f"Total Months: {str(month_count)}")
+print(f"Total: ${str(total_revenue)}")
+print(f"Average Change: ${str(round(avg_change,2))}")
+print(f"Greatest Increase in Profits: {max_month} (${str(greatest_increase)})")
+print(f"Greatest Decrease in Profits: {min_month} (${str(greatest_decrease)})")
 
-        
+# open the file using "write" mode
+with open(output_path, 'w') as txtfile:
 
-#vavg_monthly_change = sum(monthly_revenue_change) / len(row)
-#print(avg_monthly_change)
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#set counter and running calculation to 0 and create lists to store data
-    # count = 0
-    # totalProfit = 0
-    # previousRev = 0
-    # revChange = 0
-    # averageChange = 0
-    # monthChange = []
-    # revChangeList = []
-    
-    # for row in csv_reader:      
-    #     #this will count number of months
-    #     count = count + 1
-    #     #this will calculate the total profit/loss
-    #     totalProfit = totalProfit + int(row[1])
-    #     # # Add number months
-    #     # monthChange.append(row[0])
-    #     # # Add profit/loss amounts
-    #     revChangeList = revChange.append(row[1])
-
-    #     #prior Change = int(row[1])
-    #     revChange = int(row[1]) - previousRev
-    #     previousRev = int(row[1])
-    #     monthChange = monthChange + int(row[0]
-
-    # something = sum(revChange) / len(revChange)
-    # print(averageChange)
-
-
-    #     final_profit = int(row[1])
-    #     monthly_change_profits = final_profit - initial_profit
-
-    #   #Store these monthly changes in a list
-    #     monthly_changes.append(monthly_change_profits)
-
-    #     total_change_profits = total_change_profits + monthly_change_profits
-    #     initial_profit = final_profit
-
-    #     #Calculate the average change in profits
-    #     average_change_profits = (total_change_profits/count)
-        
-    #     #Find the max and min change in profits and the corresponding dates these changes were obeserved
-    #     greatest_increase_profits = max(monthly_changes)
-    #     greatest_decrease_profits = min(monthly_changes)
-
-    #     increase_date = date[monthly_changes.index(greatest_increase_profits)]
-    #     decrease_date = date[monthly_changes.index(greatest_decrease_profits)]
-    
-            
-    ## Add Print Statments
-    #print(count)
-    #print(totalProfit)
+# rite the print statements including '\n' to dictate end of line
+    txtfile.write("Financial Analysis\n")
+    txtfile.write("---------------------\n")
+    txtfile.write(f"Total Months: {str(month_count)}\n")
+    txtfile.write(f"Total: ${str(total_revenue)}\n")
+    txtfile.write(f"Average Change: ${str(round(avg_change,2))}\n")
+    txtfile.write(f"Greatest Increase in Profits: {max_month} (${str(greatest_increase)})\n")
+    txtfile.write(f"Greatest Decrease in Profits: {min_month} (${str(greatest_decrease)})\n")
 
