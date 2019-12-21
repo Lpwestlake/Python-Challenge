@@ -55,7 +55,7 @@ greatest_decrease = min(revenue_change_list)
   
 # generate print statmeents
 print("Financial Analysis")
-print("---------------------")
+print("-------------------------")
 print(f"Total Months: {str(month_count)}")
 print(f"Total: ${str(total_revenue)}")
 print(f"Average Change: ${str(round(avg_change,2))}")
@@ -67,7 +67,7 @@ with open(output_path, 'w') as txtfile:
 
 # rite the print statements including '\n' to dictate end of line
     txtfile.write("Financial Analysis\n")
-    txtfile.write("---------------------\n")
+    txtfile.write("-------------------------\n")
     txtfile.write(f"Total Months: {str(month_count)}\n")
     txtfile.write(f"Total: ${str(total_revenue)}\n")
     txtfile.write(f"Average Change: ${str(round(avg_change,2))}\n")
