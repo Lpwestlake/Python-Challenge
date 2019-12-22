@@ -7,7 +7,7 @@ csvpath = os.path.join("Pypoll", "Resources/election_data.csv")
 # define write path for output (run from Python-Challenge folder)
 output_path = os.path.join("PyPoll", "Output/PyPoll.txt")
 
-# C:\Users\westl\Desktop\Python-Challenge\Python-Challenge\PyBank\Resources\budget_data.csv
+# C:\Users\westl\Desktop\Python-Challenge\Python-Challenge\PyPoll\Resources\election_data.csv
 
 with open(csvpath, newline="") as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
